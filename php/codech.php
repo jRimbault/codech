@@ -6,11 +6,6 @@ function main(array $argv) {
     $content = binRead($argv[3]);
     if ($argv[2] === "--encode" || $argv[2] === "-e") {
         $result = encode($matrix, $content);
-        file_put_contents(
-            "codech.log",
-            pack("c*", ...decode($matrix, $result)),
-            FILE_APPEND
-        );
     } else {
         $result = decode($matrix, $content);
     }
@@ -21,12 +16,12 @@ function binRead(string $filename): array {
     $handle = fopen($filename, "rb");
     $content = fread($handle, filesize($filename));
     fclose($handle);
-    return array_values(unpack("c*", $content));
+    return array_values(unpack("C*", $content));
 }
 
 function binWrite(string $filename, array $contents) {
     $handle = fopen($filename, "wb");
-    fwrite($handle, pack("c*", ...$contents));
+    fwrite($handle, pack("C*", ...$contents));
     fclose($handle);
 }
 
@@ -53,8 +48,8 @@ function decode(Matrix $matrix, array $bytes): array {
     $decoded = [];
     for ($i = 0; $i < count($bytes); $i += 2) {
         [$a, $b] = [$bytes[$i], $bytes[$i + 1]];
-        $p1 = $matrix->decode[abs($a)];
-        $p2 = $matrix->decode[abs($b)] << 4;
+        $p1 = $matrix->decode[$a];
+        $p2 = $matrix->decode[$b] << 4;
         $decoded[] = $p1 | $p2;
     }
     return $decoded;

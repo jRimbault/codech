@@ -46,7 +46,7 @@ case $LANG in
         ;;
     ruby)
         cd /app/ruby
-        ruby codech.rb "../$KEY" "../$INPUT" "../$OUTPUT" "--$ACTION"
+        ruby codech.rb "../$KEY" "--$ACTION" "../$INPUT" "../$OUTPUT"
         ;;
     *)
         echo "Usage: run_codech.sh <language> <encode|decode> <input> <output> <keyfile>"

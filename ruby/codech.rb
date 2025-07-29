@@ -15,8 +15,8 @@ def main(args)
 end
 
 def work(codec, source, dest)
-  content = IO.binread(source).unpack("c*")
-  IO.binwrite(dest, codec.call(content).pack("c*"))
+  content = IO.binread(source).unpack("C*")
+  IO.binwrite(dest, codec.call(content).pack("C*"))
 end
 
 MASK = 0x0F
