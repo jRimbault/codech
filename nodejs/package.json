@@ -1,0 +1,24 @@
+{
+  "name": "codech",
+  "version": "1.0.0",
+  "description": "",
+  "main": "codech.js",
+  "devDependencies": {
+    "@types/node": "^13.1.1",
+    "typescript": "^3.7.4"
+  },
+  "scripts": {
+    "build": "tsc",
+    "bench": "npm run build && make bench"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jRimbault/codech.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jRimbault/codech/issues"
+  },
+  "homepage": "https://github.com/jRimbault/codech#readme"
+}

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+mode="debug"
+megabytes=288
+original="/tmp/profiling.data"
+encoded="/tmp/profiling.encoded.data"
+decoded="/tmp/profiling.decoded.data"
+
+dd if=/dev/urandom of="$original" bs=1M count="$megabytes"
+
+perf record -g ./target/"$mode"/codech key.txt -e "$original" "$encoded"
+perf script | stackcollapse-perf.pl | flamegraph.pl > ./docs/flame-encode-"$mode".svg
+
+perf record -g ./target/"$mode"/codech key.txt -d "$encoded" "$decoded"
+perf script | stackcollapse-perf.pl | flamegraph.pl > ./docs/flame-decode-"$mode".svg
+
+rm -r "$original" "$encoded" "$decoded"

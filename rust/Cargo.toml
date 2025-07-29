@@ -1,0 +1,21 @@
+[package]
+name = "codech"
+version = "0.1.0"
+authors = ["jRimbault <jacques.rimbault@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+cache-size = "0.5"
+exitcode = "1.1"
+rayon = "1.3"
+structopt = "0.3"
+
+[dev-dependencies]
+rstest = "0.6"
+rand = "0.7"
+
+[profile.release]
+codegen-units = 1
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(tarpaulin_include)'] }

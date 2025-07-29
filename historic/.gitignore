@@ -1,0 +1,6 @@
+codec
+build/*
+!build/.gitkeep
+cmake-build-debug/
+.idea/workspace.xml
+/.idea/*

@@ -1,0 +1,11 @@
+.git
+.gitignore
+*.md
+data/
+benchmarks/
+target/
+build/
+node_modules/
+*.tmp
+*.log
+!scripts/

@@ -1,0 +1,113 @@
+version: '3.8'
+
+services:
+  # Main codech service for interactive use
+  codech:
+    build: .
+    container_name: codech_unified
+    volumes:
+      - ./data:/app/data:rw
+    working_dir: /app
+    command: ["bash"]
+    stdin_open: true
+    tty: true
+    environment:
+      - TERM=xterm-256color
+
+  # Individual language services for testing
+  codech-rust:
+    build: .
+    container_name: codech_rust
+    volumes:
+      - ./data:/app/data:rw
+    command: ["./run_codech.sh", "rust", "encode", "test.txt", "data/rust_output.dat", "key.txt"]
+    
+  codech-c:
+    build: .
+    container_name: codech_c  
+    volumes:
+      - ./data:/app/data:rw
+    command: ["./run_codech.sh", "c", "encode", "test.txt", "data/c_output.dat", "key.txt"]
+
+  codech-historic:
+    build: .
+    container_name: codech_historic
+    volumes:
+      - ./data:/app/data:rw
+    command: ["./run_codech.sh", "historic", "encode", "test.txt", "data/historic_output.dat", "key.txt"]
+
+  codech-csharp:
+    build: .
+    container_name: codech_csharp
+    volumes:
+      - ./data:/app/data:rw
+    command: ["./run_codech.sh", "csharp", "encode", "test.txt", "data/csharp_output.dat", "key.txt"]
+
+  codech-go:
+    build: .
+    container_name: codech_go
+    volumes:
+      - ./data:/app/data:rw
+    command: ["./run_codech.sh", "go", "encode", "test.txt", "data/go_output.dat", "key.txt"]
+
+  codech-java:
+    build: .
+    container_name: codech_java
+    volumes:
+      - ./data:/app/data:rw
+    command: ["./run_codech.sh", "java", "encode", "test.txt", "data/java_output.dat", "key.txt"]
+
+  codech-nodejs:
+    build: .
+    container_name: codech_nodejs
+    volumes:
+      - ./data:/app/data:rw
+    command: ["./run_codech.sh", "nodejs", "encode", "test.txt", "data/nodejs_output.dat", "key.txt"]
+
+  codech-php:
+    build: .
+    container_name: codech_php
+    volumes:
+      - ./data:/app/data:rw
+    command: ["./run_codech.sh", "php", "encode", "test.txt", "data/php_output.dat", "key.txt"]
+
+  codech-python:
+    build: .
+    container_name: codech_python
+    volumes:
+      - ./data:/app/data:rw
+    command: ["./run_codech.sh", "python", "encode", "test.txt", "data/python_output.dat", "key.txt"]
+
+  codech-ruby:
+    build: .
+    container_name: codech_ruby
+    volumes:
+      - ./data:/app/data:rw
+    command: ["./run_codech.sh", "ruby", "encode", "test.txt", "data/ruby_output.dat", "key.txt"]
+
+  # Benchmark service
+  benchmark:
+    build: .
+    container_name: codech_benchmark
+    volumes:
+      - ./data:/app/data:rw
+      - ./benchmarks:/app/benchmarks:rw
+    command: ["bash", "-c", "./benchmark.sh | tee /app/benchmarks/results.csv"]
+    profiles:
+      - benchmark
+
+  # Development service with all tools
+  dev:
+    build: .
+    container_name: codech_dev
+    volumes:
+      - .:/app:rw
+      - ./data:/app/data:rw
+    working_dir: /app
+    command: ["bash"]
+    stdin_open: true
+    tty: true
+    environment:
+      - TERM=xterm-256color
+    profiles:
+      - dev
