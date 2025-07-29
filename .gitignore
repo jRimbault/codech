@@ -316,3 +316,108 @@ obj/
 *.data
 *.data.old
 .mypy_cache/
+
+# Project-specific test files and data
+test_decoded*.txt
+*_decoded.txt
+*_decoded_fixed.txt
+test_input.txt
+test_key.txt
+random.dat
+encoded.dat
+decoded.dat
+
+# Rust specific
+rust/target/
+rust/Cargo.lock
+
+# Go specific
+golang/go.mod
+golang/go.sum
+golang/vendor/
+golang/codech
+
+# Java specific
+java/*.class
+java/*.jar
+java/target/
+java/.mvn/
+java/mvnw
+java/mvnw.cmd
+
+# C# / .NET specific
+csharp/bin/
+csharp/obj/
+csharp/*.user
+csharp/*.suo
+csharp/*.userprefs
+csharp/.vs/
+
+# Node.js / TypeScript specific
+nodejs/node_modules/
+nodejs/npm-debug.log*
+nodejs/yarn-debug.log*
+nodejs/yarn-error.log*
+nodejs/.npm
+nodejs/.yarn-integrity
+nodejs/dist/
+nodejs/build/
+nodejs/*.tsbuildinfo
+
+# Python specific
+python/__pycache__/
+python/*.py[cod]
+python/*$py.class
+python/*.so
+python/.Python
+python/build/
+python/develop-eggs/
+python/dist/
+python/downloads/
+python/eggs/
+python/.eggs/
+python/lib/
+python/lib64/
+python/parts/
+python/sdist/
+python/var/
+python/wheels/
+python/share/python-wheels/
+python/*.egg-info/
+python/.installed.cfg
+python/*.egg
+python/MANIFEST
+
+# PHP specific
+php/vendor/
+php/composer.lock
+php/.phpunit.result.cache
+
+# Ruby specific
+ruby/.bundle/
+ruby/vendor/bundle/
+ruby/log/*.log
+ruby/pkg/
+ruby/spec/reports/
+ruby/.byebug_history
+ruby/Gemfile.lock
+
+# Docker and container files
+data/
+benchmarks/
+.dockerignore
+docker-compose.override.yml
+
+# Build artifacts from all languages
+*/codech
+*/codech.exe
+**/a.out
+**/main
+**/main.exe
+
+# IDE and editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
