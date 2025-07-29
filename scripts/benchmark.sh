@@ -11,7 +11,7 @@ echo "===================================="
 echo ""
 
 # All implementations to test
-ALL_LANGS="rust c historic csharp go java nodejs php python ruby"
+ALL_LANGS="rust c historic csharp csharp-fast go java nodejs php python ruby"
 
 echo "Phase 1: CORRECTNESS VALIDATION"
 echo "--------------------------------"

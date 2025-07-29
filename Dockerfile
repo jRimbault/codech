@@ -61,7 +61,17 @@ RUN wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-p
     apt-get install -y dotnet-sdk-8.0 && \
     rm packages-microsoft-prod.deb
 WORKDIR /app/csharp
-RUN dotnet build -c Release
+RUN dotnet publish -c Release -r linux-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true
+
+# C# Fast build container (new high-performance version)
+FROM source-base AS csharp-fast-builder
+RUN wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+    dpkg -i packages-microsoft-prod.deb && \
+    apt-get update && \
+    apt-get install -y dotnet-sdk-8.0 && \
+    rm packages-microsoft-prod.deb
+WORKDIR /app/csharp-fast/Codech
+RUN dotnet publish -c Release -r linux-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true
 
 # Go build container
 FROM source-base AS go-builder
@@ -137,6 +147,7 @@ COPY --from=rust-builder /app /app
 COPY --from=c-builder /app/c/build/Codech /app/c/build/Codech
 COPY --from=historic-builder /app/historic/build/codec /app/historic/build/codec
 COPY --from=csharp-builder /app/csharp/bin /app/csharp/bin
+COPY --from=csharp-fast-builder /app/csharp-fast/Codech/bin /app/csharp-fast/bin
 COPY --from=go-builder /app/golang/codech /app/golang/codech
 COPY --from=java-builder /app/java/build /app/java/build
 COPY --from=nodejs-builder /app/nodejs /app/nodejs
