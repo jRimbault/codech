@@ -68,7 +68,7 @@ FROM source-base AS go-builder
 RUN curl -fsSL https://go.dev/dl/go1.21.5.linux-amd64.tar.gz | tar -xzC /usr/local
 ENV PATH="/usr/local/go/bin:${PATH}"
 WORKDIR /app/golang
-RUN go build -o codech main.go
+RUN go mod init codech && go build -o codech main.go
 
 # Java build container
 FROM source-base AS java-builder
